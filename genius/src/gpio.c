@@ -330,10 +330,12 @@ void intButtonSetup(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
                 GPIOINT0A = false;
+				mirClear(96);
             }
             else {
                 HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
-                GPIOINT0A = false;
+                GPIOINT0B = false;
+				mirClear(97);
             }
             HWREG(SOC_GPIO_0_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
             HWREG(SOC_GPIO_0_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
@@ -343,10 +345,12 @@ void intButtonSetup(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
                 GPIOINT1A = false;
+				mirClear(98);
             }
             else {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
-                GPIOINT1A = false;
+                GPIOINT1B = false;
+				mirClear(99);
             }
             HWREG(SOC_GPIO_1_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
             HWREG(SOC_GPIO_1_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
@@ -356,10 +360,12 @@ void intButtonSetup(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
                 GPIOINT2A = false;
+				mirClear(32);
             }
             else {
                 HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
-                GPIOINT2A = false;
+                GPIOINT2B = false;
+				mirClear(33);
             }
             HWREG(SOC_GPIO_2_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
             HWREG(SOC_GPIO_2_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
@@ -369,10 +375,12 @@ void intButtonSetup(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
                 GPIOINT3A = false;
+				mirClear(62);
             }
             else {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
-                GPIOINT3A = false;
+                GPIOINT3B = false;
+				mirClear(63);
             }
             HWREG(SOC_GPIO_3_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
             HWREG(SOC_GPIO_3_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
