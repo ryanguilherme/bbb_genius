@@ -47,7 +47,7 @@ int main(void){
 
     geniusSetup();
 
-    
+    DMTimerEnable(SOC_DMTIMER_7_REGS);
 
     while(1){
         while(GPIOINT2A){
