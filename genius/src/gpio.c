@@ -303,7 +303,81 @@ unsigned int gpioGetPinValue(gpioMod mod, ucPinNumber pin){
       		}*/
 		return(1);
    	}else{
-    		return(-1);  // isnt a valid mod/pin combination or doesnt exist
+        return(-1);  // isnt a valid mod/pin combination or doesnt exist
    	}
 }/* -----  end of function gpiogetPinValue  ----- */
+
+/*
+ * ===  FUNCTION  ======================================================================
+ *         Name:  intButtonSetup
+ *  Description:  Configure GPIO PIN as a interrupt button
+ *                configure GPIO PIN mux for input GPIO
+ *                Clear GPIO PIN for input
+ *                Set GPIO PIN as interrupt
+ *                Enable interrupt generation on detection of a rising edge
+ *                Enable debounce for GPIO PIN
+ * =====================================================================================
+ */
+void intButtonSetup(gpioMod GPIO, intMode INT, pinNum PIN){
+
+    gpioPinMuxSetup(GPIO, PIN);
+
+    switch (GPIO) {
+        case GPIO0:
+            HWREG(SOC_GPIO_0_REGS + GPIO_OE) |= (1<<PIN);
+            if (INT == A) {
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
+                GPIOINT0A = false;
+            }
+            else {
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
+                GPIOINT0A = false;
+            }
+            HWREG(SOC_GPIO_0_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
+            HWREG(SOC_GPIO_0_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
+            break;
+        case GPIO1:
+            HWREG(SOC_GPIO_1_REGS + GPIO_OE) |= (1<<PIN);
+            if (INT == A) {
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
+                GPIOINT1A = false;
+            }
+            else {
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
+                GPIOINT1A = false;
+            }
+            HWREG(SOC_GPIO_1_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
+            HWREG(SOC_GPIO_1_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
+            break;
+        case GPIO2:
+            HWREG(SOC_GPIO_2_REGS + GPIO_OE) |= (1<<PIN);
+            if (INT == A) {
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
+                GPIOINT2A = false;
+            }
+            else {
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
+                GPIOINT2A = false;
+            }
+            HWREG(SOC_GPIO_2_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
+            HWREG(SOC_GPIO_2_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
+            break;
+        case GPIO3:
+            HWREG(SOC_GPIO_3_REGS + GPIO_OE) |= (1<<PIN);
+            if (INT == A) {
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_SET_0) = (1<<PIN);
+                GPIOINT3A = false;
+            }
+            else {
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_SET_1) = (1<<PIN);
+                GPIOINT3A = false;
+            }
+            HWREG(SOC_GPIO_3_REGS + GPIO_RISINGDETECT) |= (1<<PIN);
+            HWREG(SOC_GPIO_3_REGS + GPIO_DEBOUNCENABLE) |= (1<<PIN);
+            break;
+        default:
+            break;
+
+    }
+}/* -----  end of function butConfig  ----- */
 

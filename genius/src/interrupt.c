@@ -18,51 +18,51 @@ void timerIrqHandler(void) {
 /*
  * ===  FUNCTION  ======================================================================
  *         Name:  gpioIsrHandler
- *  Description: Interrupt Service Routine for GPIO
+ *  Description:  Interrupt Service Routine for GPIO
  * =====================================================================================
  */
 void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
-    
+
     /* Clear the status of the interrupt flags */
     switch (GPIO) {
         case GPIO0:
             if (INT == A) {
                 HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
-                GPIOINT0A ^= 1;
+                GPIOINT0A = true;
             }
             else {
                 HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_1) = (1 << PIN);
-                GPIOINT0B ^= 1;
+                GPIOINT0B = true;
             }
             break;
         case GPIO1:
             if (INT == A) {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) = (1 << PIN);
-                GPIOINT1A ^= 1;
+                GPIOINT1A = true;
             }
             else {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
-                GPIOINT1B ^= 1;
+                GPIOINT1B = true;
             }
             break;
         case GPIO2:
             if (INT == A) {
                 HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
-                GPIOINT2A ^= 1;
+                GPIOINT2A = true;
             }
             else {
                 HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
-                GPIOINT2B ^= 1;
+                GPIOINT2B = true;
             }
             break;
         case GPIO3:
             if (INT == A) {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
-                GPIOINT3A ^= 1;
+                GPIOINT3A = true;
             }
             else {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
-                GPIOINT3B ^= 1;
+                GPIOINT3B = true;
             }
             break;
         default:

@@ -33,37 +33,12 @@
 **                INTERNAL FUNCTION PROTOTYPES
 *****************************************************************************/
 
-bool flag_gpio;
-
 bool flag_timer;
-
-
-// TODO: make butConfig modular
-void butConfig ( ){
-    /* configure pin 28 mux for input GPIO */
-    HWREG(CM_PER_GPMCBEn1_REGS) |= 0x2F;
-    //gpioPinMuxSetup(GPIO1, 28);
-
-    /* clear pin 28 for input, led USR0, TRM 25.3.4.3 */
-    HWREG(SOC_GPIO_1_REGS + GPIO_OE) |= 1<<28;
-
-    flag_gpio = false;
-
-    /* Setting interrupt GPIO pin. */
-    HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_SET_0) |= 1<<28;
-
-    /* Enable interrupt generation on detection of a rising edge.*/
-    HWREG(SOC_GPIO_1_REGS + GPIO_RISINGDETECT) |= 1<<28;
-
-    /* Enable debounce for pin 28 GPIO1 */
-    HWREG(SOC_GPIO_1_REGS + GPIO_DEBOUNCENABLE) |= 1<<28;
-}/* -----  end of function butConfig  ----- */
-
 
 /*
  * ===  FUNCTION  ======================================================================
  *         Name:  main
- *  Description:
+ *  Description:  main function
  * =====================================================================================
  */
 int main(void){

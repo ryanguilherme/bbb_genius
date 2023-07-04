@@ -24,6 +24,7 @@
 #include "pad.h"
 #include "soc_AM335x.h"
 #include "hw_types.h"
+#include "interrupt.h"
 
 #define GPIO_REVISION           0x000
 #define GPIO_SYSCONFIG          0x010
@@ -87,8 +88,9 @@ typedef enum _pinDirection{
 void gpioInitModule(gpioMod );
 void gpioPinMuxSetup(gpioMod ,ucPinNumber );
 void gpioSetDirection(gpioMod ,ucPinNumber ,pinDirection );	
-int  gpioGetDirection(ucPinNumber ,ucPinNumber );
+int  gpioGetDirection(gpioMod ,ucPinNumber );
 void gpioSetPinValue(gpioMod ,ucPinNumber ,pinLevel );
 unsigned int gpioGetPinValue(gpioMod ,ucPinNumber );
+void intButtonSetup(gpioMod, intMode, pinNum);
 	
 #endif /*GPIO_H_ */

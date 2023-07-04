@@ -16,14 +16,14 @@ extern bool flag_timer;
 /**
  * GPIO INTERRUPTION FLAGS DECLARATION
 **/
-bool GPIOINT0A;
-bool GPIOINT0B;
-bool GPIOINT1A;
-bool GPIOINT1B;
-bool GPIOINT2A;
-bool GPIOINT2B;
-bool GPIOINT3A;
-bool GPIOINT3B;
+bool GPIOINT0A = false;
+bool GPIOINT0B = false;
+bool GPIOINT1A = false;
+bool GPIOINT1B = false;
+bool GPIOINT2A = false;
+bool GPIOINT2B = false;
+bool GPIOINT3A = false;
+bool GPIOINT3B = false;
 
 #define INTCPS                  0x48200000
 #define INTC_MIR_CLEAR0         0x88
