@@ -32,7 +32,7 @@ pad.o: $(SRC)pad.c
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)pad.c -o $(OBJ)pad.o
 
 genius.o: $(SRC)genius.c
-	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)genius.c -o $(OBJ)led.o
+	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)genius.c -o $(OBJ)genius.o
 
 interrupt.o: $(SRC)interrupt.c
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)interrupt.c -o $(OBJ)interrupt.o
