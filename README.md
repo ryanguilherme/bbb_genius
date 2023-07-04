@@ -6,7 +6,7 @@ Este projeto implementa o jogo Genius na plataforma BeagleBone Black. O Genius �
 
 ## Funcionamento do Jogo
 
-O jogo Genius consiste em uma matriz de botões coloridos e um painel de luzes correspondentes. O objetivo do jogo é memorizar e repetir sequências de cores e sons que são reproduzidas aleatoriamente pelo sistema. Cada jogador deve repetir corretamente a sequência apresentada para avançar para a próxima rodada.
+O jogo Genius consiste em uma matriz de botões e um painel de luzes correspondentes. O objetivo do jogo é memorizar e repetir sequências de cores e sons que são reproduzidas aleatoriamente pelo sistema. Cada jogador deve repetir corretamente a sequência apresentada para avançar para a próxima rodada.
 
 O jogo é controlado pela BeagleBone Black, uma placa de desenvolvimento embarcado baseada no processador ARM. A BeagleBone Black executa o código implementado em linguagem C e é responsável pela geração dos sinais de áudio, controle dos botões e acendimento das luzes.
 
@@ -14,17 +14,15 @@ O jogo é controlado pela BeagleBone Black, uma placa de desenvolvimento embarca
 
 O projeto está organizado da seguinte forma:
 
-
-genius/
-├── bin/             # Arquivos binários (.boot)
-├── inc/             # Arquivos de cabeçalho (.h)
-├── obj/             # Objetos compilados (.o)
-└── src/             # Arquivos de código fonte (.c)
-resources/           # Recursos do projeto
-│   └── base.png     # Foto da base da arquitetura do projeto
-Makefile             # Arquivo de compilação e execução
-README.md            # Documentação do projeto (você está aqui)
-
+genius/\
+├── bin/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos binários (.boot)\
+├── inc/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos de cabeçalho (.h)\
+├── obj/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Objetos compilados (.o)\
+└── src/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos de código fonte (.c)\
+resources/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Recursos do projeto\
+|   └── base.png&nbsp;&nbsp;&nbsp;&nbsp;# Foto da base da arquitetura do projeto\
+Makefile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivo de compilação e execução\
+README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Documentação do projeto (você está aqui)
 
 ## Autores
 
