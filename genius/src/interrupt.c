@@ -18,7 +18,7 @@ void timerIrqHandler(void) {
 /*
  * ===  FUNCTION  ======================================================================
  *         Name:  gpioIsrHandler
- *  Description:
+ *  Description: Interrupt Service Routine for GPIO
  * =====================================================================================
  */
 void gpioIsrHandler(void){
@@ -33,22 +33,33 @@ void gpioIsrHandler(void){
 /*
  * ===  FUNCTION  ======================================================================
  *         Name:  ISR_Handler
- *  Description:
+ *  Description: Interrupt Service Routine
  * =====================================================================================
  */
+
 void ISR_Handler(void){
-    /* Verify active IRQ number */
-    unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
-    uartPutString(UART0, "INTERRUPTION TRIGGERED\n\r", 25);
-
-    if(irq_number == 98)
-        gpioIsrHandler();
-    else if (irq_number == 95)
-        timerIrqHandler();
-
+	/* Verify active IRQ number */
+	unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
+	switch(irq_number){
+		case 95:
+			timerIrqHandler();
+			uartPutString(UART0,"Interupt timer on!\n\r",21);
+			break;
+		case 98:
+			gpioIsrHandler();
+			uartPutString(UART0,"Interupt button on!\n\r",23);
+			break;
+	}
     /* acknowledge IRQ */
-    HWREG(INTCPS + INTC_CONTROL) = 0x1;
+	HWREG(INTCPS + INTC_CONTROL) = 0x1;
 }
+
+/*
+ * ===  FUNCTION  ======================================================================
+ *         Name:  mirClear
+ *  Description: Enable interrupt for a specific source
+ * =====================================================================================
+ */
 
 void mirClear(int number) {
     int MIR_CLEAR = number / 32;
