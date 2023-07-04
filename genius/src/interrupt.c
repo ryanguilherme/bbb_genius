@@ -82,6 +82,14 @@ void ISR_Handler(void){
 	/* Verify active IRQ number */
 	unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
 	switch(irq_number){
+        case 32:
+            gpioIsrHandler(GPIO2, A, PIN6);
+            uartPutString(UART0,"INT: GPIO2 PIN8\n\r",19);
+            break;
+        case 33:
+            gpioIsrHandler(GPIO2, B, PIN8);
+            uartPutString(UART0,"INT: GPIO2 PIN8\n\r",19);
+            break;
         case 62:
             gpioIsrHandler(GPIO3, A, PIN21);
             uartPutString(UART0,"INT: GPIO3 PIN21\n\r",19);
