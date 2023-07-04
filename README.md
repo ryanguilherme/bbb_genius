@@ -14,15 +14,17 @@ O jogo é controlado pela BeagleBone Black, uma placa de desenvolvimento embarca
 
 O projeto está organizado da seguinte forma:
 
-genius/\
-├── bin/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos binários (.boot)\
-├── inc/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos de cabeçalho (.h)\
-├── obj/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Objetos compilados (.o)\
-└── src/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivos de código fonte (.c)\
-resources/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Recursos do projeto\
-|   └── base.png&nbsp;&nbsp;&nbsp;&nbsp;# Foto da base da arquitetura do projeto\
-Makefile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Arquivo de compilação e execução\
-README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Documentação do projeto (você está aqui)
+```
+genius/
+├── bin/             # Arquivos binários (.boot)
+├── inc/             # Arquivos de cabeçalho (.h)
+├── obj/             # Objetos compilados (.o)
+└── src/             # Arquivos de código fonte (.c)
+resources/           # Recursos do projeto
+│   └── base.png     # Foto da base da arquitetura do projeto
+Makefile             # Arquivo de compilação e execução
+README.md            # Documentação do projeto (você está aqui)
+```
 
 ## Autores
 
