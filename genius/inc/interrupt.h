@@ -13,6 +13,18 @@
 extern bool flag_gpio;
 extern bool flag_timer;
 
+/**
+ * GPIO INTERRUPTION FLAGS DECLARATION
+**/
+bool GPIOINT0A;
+bool GPIOINT0B;
+bool GPIOINT1A;
+bool GPIOINT1B;
+bool GPIOINT2A;
+bool GPIOINT2B;
+bool GPIOINT3A;
+bool GPIOINT3B;
+
 #define INTCPS                  0x48200000
 #define INTC_MIR_CLEAR0         0x88
 #define INTC_MIR_CLEAR1         0xA8
@@ -21,7 +33,7 @@ extern bool flag_timer;
 #define INTC_SIR_IRQ            0x40
 #define INTC_CONTROL            0x48
 
-void gpioIsrHandler(void);
+void gpioIsrHandler(gpioMod, intMode, pinNum);
 void ISR_Handler(void);
 void timerIrqHandler(void);
 void mirClear(int);

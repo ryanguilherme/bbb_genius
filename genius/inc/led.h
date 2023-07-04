@@ -10,17 +10,6 @@
 #include "control_module.h"
 #include "gpio.h"
 
-typedef enum _pinNum{
-    PIN1=1,
-    PIN2,
-    PIN3,
-    PIN4,
-    PROTO1,
-    PROTO2,
-    PROTO3,
-    PROTO4
-}pinNum;
-
 void ledConfig();
 void ledOn(pinNum);
 void ledOff(pinNum);

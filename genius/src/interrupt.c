@@ -21,13 +21,55 @@ void timerIrqHandler(void) {
  *  Description: Interrupt Service Routine for GPIO
  * =====================================================================================
  */
-void gpioIsrHandler(void){
+void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
 
     uartPutString(UART0, "BUTTON PRESSED\n\r", 17);
     /* Clear the status of the interrupt flags */
-    HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) = 0x10000000;
+    switch (GPIO) {
+        case GPIO0:
+            if (INT == A) {
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                GPIOINT0A ^= 1;
+            }
+            else {
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_1) = (1 << PIN);
+                GPIOINT0B ^= 1;
+            }
+            break;
+        case GPIO1:
+            if (INT == A) {
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) = (1 << PIN);
+                GPIOINT1A ^= 1;
+            }
+            else {
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                GPIOINT1B ^= 1;
+            }
+            break;
+        case GPIO2:
+            if (INT == A) {
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                GPIOINT2A ^= 1;
+            }
+            else {
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                GPIOINT2B ^= 1;
+            }
+            break;
+        case GPIO3:
+            if (INT == A) {
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                GPIOINT3A ^= 1;
+            }
+            else {
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                GPIOINT3B ^= 1;
+            }
+            break;
+        default:
+            break;
 
-    flag_gpio ^= 1;
+    }
 }
 
 /*
@@ -43,11 +85,12 @@ void ISR_Handler(void){
 	switch(irq_number){
 		case 95:
 			timerIrqHandler();
-			uartPutString(UART0,"Interupt timer on!\n\r",21);
+			uartPutString(UART0,"TIMER INTERRUPT!\n\r",19);
 			break;
 		case 98:
-			gpioIsrHandler();
-			uartPutString(UART0,"Interupt button on!\n\r",23);
+
+			gpioIsrHandler(GPIO1, A, PIN28);
+			uartPutString(UART0,"BUTTON INTERRUPT!\n\r",20);
 			break;
 	}
     /* acknowledge IRQ */

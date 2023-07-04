@@ -22,6 +22,7 @@
 #include "gpio.h"
 #include "hw_types.h"
 #include "soc_AM335x.h"
+#include "interrupt.h"
 
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
