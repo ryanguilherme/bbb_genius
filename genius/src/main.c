@@ -25,13 +25,23 @@
 #include "interrupt.h"
 #include "genius.h"
 
-/*****************************************************************************
-**                INTERNAL MACRO DEFINITIONS
-*****************************************************************************/
+/**
+ * INTERRUPTS BUTTONS FLAG DECLARATION
+**/
+bool GPIOINT0A = false;
+bool GPIOINT0B = false;
+bool GPIOINT1A = false;
+bool GPIOINT1B = false;
+bool GPIOINT2A = false;
+bool GPIOINT2B = false;
+bool GPIOINT3A = false;
+bool GPIOINT3B = false;
 
-/*****************************************************************************
-**                INTERNAL FUNCTION PROTOTYPES
-*****************************************************************************/
+/**
+ * LED SEQUENCE ATTRIBUTES
+**/
+int sequenceSize = 1;
+int sequence[] ={RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW};
 
 bool flag_timer;
 
