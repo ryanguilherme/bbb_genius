@@ -22,8 +22,7 @@ void timerIrqHandler(void) {
  * =====================================================================================
  */
 void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
-
-    uartPutString(UART0, "BUTTON PRESSED\n\r", 17);
+    
     /* Clear the status of the interrupt flags */
     switch (GPIO) {
         case GPIO0:
@@ -83,15 +82,32 @@ void ISR_Handler(void){
 	/* Verify active IRQ number */
 	unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
 	switch(irq_number){
+        case 62:
+            gpioIsrHandler(GPIO3, A, PIN21);
+            uartPutString(UART0,"INT: GPIO3 PIN21\n\r",19);
+            break;
+        case 63:
+            gpioIsrHandler(GPIO3, B, PIN19);
+            uartPutString(UART0,"INT: GPIO3 PIN19\n\r",19);
+            break;
 		case 95:
 			timerIrqHandler();
-			uartPutString(UART0,"TIMER INTERRUPT!\n\r",19);
+			uartPutString(UART0,"INT: TIMER\n\r",13);
 			break;
+        case 96:
+            gpioIsrHandler(GPIO0, A, PIN7);
+            uartPutString(UART0,"INT: GPIO0 PIN7\n\r",18);
+            break;
 		case 98:
-
-			gpioIsrHandler(GPIO1, A, PIN28);
-			uartPutString(UART0,"BUTTON INTERRUPT!\n\r",20);
+			gpioIsrHandler(GPIO1, A, PIN16);
+			uartPutString(UART0,"INT: GPIO1 PIN16\n\r",19);
 			break;
+        case 99:
+            gpioIsrHandler(GPIO1, B, PIN17);
+            uartPutString(UART0,"INT: GPIO1 PIN17\n\r",20);
+            break;
+        default:
+            break;
 	}
     /* acknowledge IRQ */
 	HWREG(INTCPS + INTC_CONTROL) = 0x1;
