@@ -23,11 +23,11 @@
 #include "hw_types.h"
 #include "soc_AM335x.h"
 #include "interrupt.h"
+#include "genius.h"
 
 /*****************************************************************************
 **                INTERNAL MACRO DEFINITIONS
 *****************************************************************************/
-#define CM_PER_GPMCBEn1_REGS                    0x44E10878
 
 /*****************************************************************************
 **                INTERNAL FUNCTION PROTOTYPES
@@ -44,6 +44,116 @@ bool flag_timer;
 int main(void){
 
     disableWdt();
+
+    geniusSetup();
+
+    
+
+    while(1){
+        while(GPIOINT2A){
+           for(int i = 0; i < sequenceSize; i++){
+                if(sequence[i] == RED){
+                    gpioSetPinValue(GPIO2, 7, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 7, LOW);
+                }
+                else if(sequence[i] == GREEN){
+                    gpioSetPinValue(GPIO2, 9, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 9, LOW);
+                }
+                else if(sequence[i] == BLUE){
+                    gpioSetPinValue(GPIO2, 11, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 11, LOW);
+                }
+                else if(sequence[i] == YELLOW){
+                    gpioSetPinValue(GPIO2, 13, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 13, LOW);
+                }
+            }
+
+            delay(3000);
+
+            for(int i = 0; i < sequenceSize; i++){
+                if(sequence[i] == RED){
+                    if(GPIOINT3A){
+                        continue;
+                    }else{
+                        gpioSetPinValue(GPIO2, 7, HIGH);
+                        gpioSetPinValue(GPIO2, 9, HIGH);
+                        gpioSetPinValue(GPIO2, 11, HIGH);
+                        gpioSetPinValue(GPIO2, 13, HIGH);
+                        delay(1000);
+                        gpioSetPinValue(GPIO2, 7, LOW);
+                        gpioSetPinValue(GPIO2, 9, LOW);
+                        gpioSetPinValue(GPIO2, 11, LOW);
+                        gpioSetPinValue(GPIO2, 13, LOW);
+                        GPIOINT2A = false;
+                        sequenceSize = 0;
+                        break;
+                    }
+                }
+                else if(sequence[i] == GREEN){
+                    if(GPIOINT3B){
+                        continue;
+                    }else{
+                        gpioSetPinValue(GPIO2, 7, HIGH);
+                        gpioSetPinValue(GPIO2, 9, HIGH);
+                        gpioSetPinValue(GPIO2, 11, HIGH);
+                        gpioSetPinValue(GPIO2, 13, HIGH);
+                        delay(1000);
+                        gpioSetPinValue(GPIO2, 7, LOW);
+                        gpioSetPinValue(GPIO2, 9, LOW);
+                        gpioSetPinValue(GPIO2, 11, LOW);
+                        gpioSetPinValue(GPIO2, 13, LOW);
+                        GPIOINT2A = false;
+                        sequenceSize = 0;
+                        break;
+                    }
+                }
+                else if(sequence[i] == BLUE){
+                    if(GPIOINT1A){
+                        continue;
+                    }else{
+                        gpioSetPinValue(GPIO2, 7, HIGH);
+                        gpioSetPinValue(GPIO2, 9, HIGH);
+                        gpioSetPinValue(GPIO2, 11, HIGH);
+                        gpioSetPinValue(GPIO2, 13, HIGH);
+                        delay(1000);
+                        gpioSetPinValue(GPIO2, 7, LOW);
+                        gpioSetPinValue(GPIO2, 9, LOW);
+                        gpioSetPinValue(GPIO2, 11, LOW);
+                        gpioSetPinValue(GPIO2, 13, LOW);
+                        GPIOINT2A = false;
+                        sequenceSize = 0;
+                        break;
+                    }
+                }
+                else if(sequence[i] == YELLOW){
+                    if(GPIOINT1B){
+                        continue;
+                    }else{
+                        gpioSetPinValue(GPIO2, 7, HIGH);
+                        gpioSetPinValue(GPIO2, 9, HIGH);
+                        gpioSetPinValue(GPIO2, 11, HIGH);
+                        gpioSetPinValue(GPIO2, 13, HIGH);
+                        delay(1000);
+                        gpioSetPinValue(GPIO2, 7, LOW);
+                        gpioSetPinValue(GPIO2, 9, LOW);
+                        gpioSetPinValue(GPIO2, 11, LOW);
+                        gpioSetPinValue(GPIO2, 13, LOW);
+                        GPIOINT2A = false;
+                        sequenceSize = 0;
+                        break;
+                    }
+                }
+            }
+
+            sequenceSize++;
+        } 
+    }
 
 	return(0);
 } /* ----------  end of function main  ---------- */

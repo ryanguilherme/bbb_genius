@@ -10,6 +10,16 @@
 #include "control_module.h"
 #include "gpio.h"
 
+typedef enum color{
+    RED,
+    GREEN,
+    BLUE,
+    YELLOW
+}Color;
+ 
+int sequence[] ={RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW};
+int sequenceSize = 1;
+
 void geniusGpioModSetup();
 void geniusButtonSetup();
 void geniusLedSetup();

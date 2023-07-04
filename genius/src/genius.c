@@ -23,10 +23,10 @@ void geniusGpioModSetup() {
  * =====================================================================================
  */
 void geniusButtonSetup() {
-    intButtonSetup(GPIO1, B, PIN16);
-    intButtonSetup(GPIO1, A, PIN17);
-    intButtonSetup(GPIO3, B, PIN21);
-    intButtonSetup(GPIO3, A, PIN19);
+    intButtonSetup(GPIO1, B, PIN16);    //Yellow led
+    intButtonSetup(GPIO1, A, PIN17);   //Blue led
+    intButtonSetup(GPIO3, B, PIN21);  //Green led  
+    intButtonSetup(GPIO3, A, PIN19); //Red led
 }
 
 /*
