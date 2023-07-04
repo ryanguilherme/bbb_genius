@@ -17,8 +17,8 @@ typedef enum color{
     YELLOW
 }Color;
  
-int sequence[] ={RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW};
-int sequenceSize = 1;
+extern int sequence[];
+extern int sequenceSize;
 
 void geniusGpioModSetup();
 void geniusButtonSetup();
