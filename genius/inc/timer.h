@@ -23,7 +23,7 @@
 #include "clock_module.h"
 #include "control_module.h"
 
-#define INTERRUPT
+//#define INTERRUPT
 
 /*************************************************************************\
  * Registers Definition
