@@ -24,6 +24,7 @@
 #include "soc_AM335x.h"
 #include "interrupt.h"
 #include "genius.h"
+#include "uart.h"
 
 /**
  * INTERRUPTS BUTTONS FLAG DECLARATION
@@ -57,9 +58,10 @@ int main(void){
 
     geniusSetup();
 
-    DMTimerEnable(SOC_DMTIMER_7_REGS);
+    DMTimerSetUp();
 
     while(1){
+        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
         while(GPIOINT2A){
            for(int i = 0; i < sequenceSize; i++){
                 if(sequence[i] == RED){
@@ -89,7 +91,8 @@ int main(void){
             for(int i = 0; i < sequenceSize; i++){
                 if(sequence[i] == RED){
                     if(GPIOINT3A){
-                        continue;
+                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                        GPIOINT3A = false;
                     }else{
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
@@ -107,7 +110,8 @@ int main(void){
                 }
                 else if(sequence[i] == GREEN){
                     if(GPIOINT3B){
-                        continue;
+                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                        GPIOINT3B = false;
                     }else{
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
@@ -125,7 +129,8 @@ int main(void){
                 }
                 else if(sequence[i] == BLUE){
                     if(GPIOINT1A){
-                        continue;
+                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                        GPIOINT1A = false;
                     }else{
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
@@ -143,7 +148,8 @@ int main(void){
                 }
                 else if(sequence[i] == YELLOW){
                     if(GPIOINT1B){
-                        continue;
+                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                        GPIOINT1B = false;
                     }else{
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
