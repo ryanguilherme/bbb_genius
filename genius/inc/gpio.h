@@ -81,7 +81,8 @@ typedef enum _pinDirection{
 }pinDirection;				/* ----------  end of enum pinDirection  ---------- */
 
 typedef enum _pinNum{
-    PIN1=1,
+    PIN0=0,
+    PIN1,
     PIN2,
     PIN3,
     PIN4,
