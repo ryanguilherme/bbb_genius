@@ -9,6 +9,7 @@
 #include "hw_types.h"
 #include "timer.h"
 #include "gpio.h"
+#include "genius.h"
 
 extern bool flag_gpio;
 extern bool flag_timer;
@@ -25,6 +26,10 @@ extern bool GPIOINT2A;
 extern bool GPIOINT2B;
 extern bool GPIOINT3A;
 extern bool GPIOINT3B;
+
+extern int currentSeq[16][16];
+extern int currentIndex;
+extern int contCurrentSequence;
 
 #define INTCPS                  0x48200000
 #define INTC_MIR_CLEAR0         0x88
