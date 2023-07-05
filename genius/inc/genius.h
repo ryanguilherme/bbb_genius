@@ -19,11 +19,14 @@ typedef enum color{
  
 extern int sequence[];
 extern int sequenceSize;
+extern int currentSeq[16][16];
+extern int contCurrentSequence;
 
 void geniusGpioModSetup();
 void geniusButtonSetup();
 void geniusLedSetup();
 void geniusSetup();
+void geniusLedSequence();
 
 
 #endif //GENIUS_H

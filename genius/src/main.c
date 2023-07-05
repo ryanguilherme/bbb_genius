@@ -43,7 +43,9 @@ bool GPIOINT3B = false;
 **/
 int sequenceSize = 1;
 int sequence[] ={RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW};
-
+int currentSeq[16][16];
+int currentIndex = 0;
+int contCurrentSequence = 0;
 bool flag_timer;
 
 /*
@@ -60,40 +62,34 @@ int main(void){
 
     DMTimerSetUp();
 
+    gpioPinMuxSetup(GPIO2, 8);
+    gpioSetDirection(GPIO2, 8, OUTPUT);
+
+    uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
+
     while(1){
-        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
+        //uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
         while(GPIOINT2A){
-           for(int i = 0; i < sequenceSize; i++){
-                if(sequence[i] == RED){
-                    gpioSetPinValue(GPIO2, 7, HIGH);
-                    delay(1000);
-                    gpioSetPinValue(GPIO2, 7, LOW);
-                }
-                else if(sequence[i] == GREEN){
-                    gpioSetPinValue(GPIO2, 9, HIGH);
-                    delay(1000);
-                    gpioSetPinValue(GPIO2, 9, LOW);
-                }
-                else if(sequence[i] == BLUE){
-                    gpioSetPinValue(GPIO2, 11, HIGH);
-                    delay(1000);
-                    gpioSetPinValue(GPIO2, 11, LOW);
-                }
-                else if(sequence[i] == YELLOW){
-                    gpioSetPinValue(GPIO2, 13, HIGH);
-                    delay(1000);
-                    gpioSetPinValue(GPIO2, 13, LOW);
-                }
-            }
+            gpioSetPinValue(GPIO2, 8, HIGH);
+            delay(100);
+            gpioSetPinValue(GPIO2, 8, LOW);
+            delay(100);
+            gpioSetPinValue(GPIO2, 8, HIGH);
+            delay(100);
+            gpioSetPinValue(GPIO2, 8, LOW);
 
-            delay(3000);
+            geniusLedSequence();
+            
+            delay(3000); // espera 3 segundos para começar a verificar 
 
+            
             for(int i = 0; i < sequenceSize; i++){
                 if(sequence[i] == RED){
-                    if(GPIOINT3A){
-                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                    if(GPIOINT3A && currentSeq[currentIndex][i] == RED){
+                        uartPutString(UART0, "Você acertou o botao vermelho\n\r", 32);
                         GPIOINT3A = false;
                     }else{
+                        uartPutString(UART0, "Você errou a sequencia\n\r", 26);
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
                         gpioSetPinValue(GPIO2, 11, HIGH);
@@ -104,15 +100,25 @@ int main(void){
                         gpioSetPinValue(GPIO2, 11, LOW);
                         gpioSetPinValue(GPIO2, 13, LOW);
                         GPIOINT2A = false;
-                        sequenceSize = 0;
+                        sequenceSize = 0;                        
+                        currentIndex = -1;
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
                         break;
                     }
                 }
                 else if(sequence[i] == GREEN){
-                    if(GPIOINT3B){
-                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                    if(GPIOINT3B && currentSeq[currentIndex][i] == GREEN){
+                        uartPutString(UART0, "Você acertou o botao verde\n\r", 29);
                         GPIOINT3B = false;
                     }else{
+                        uartPutString(UART0, "Você errou a sequencia\n\r", 26);
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
                         gpioSetPinValue(GPIO2, 11, HIGH);
@@ -124,14 +130,24 @@ int main(void){
                         gpioSetPinValue(GPIO2, 13, LOW);
                         GPIOINT2A = false;
                         sequenceSize = 0;
+                        currentIndex = -1;
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
                         break;
                     }
                 }
                 else if(sequence[i] == BLUE){
-                    if(GPIOINT1A){
-                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                    if(GPIOINT1A && currentSeq[currentIndex][i] == BLUE){
+                        uartPutString(UART0, "Você acertou o botao azul\n\r", 28);
                         GPIOINT1A = false;
                     }else{
+                        uartPutString(UART0, "Você errou a sequencia\n\r", 26);
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
                         gpioSetPinValue(GPIO2, 11, HIGH);
@@ -143,14 +159,24 @@ int main(void){
                         gpioSetPinValue(GPIO2, 13, LOW);
                         GPIOINT2A = false;
                         sequenceSize = 0;
+                        currentIndex = -1;
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
                         break;
                     }
                 }
                 else if(sequence[i] == YELLOW){
-                    if(GPIOINT1B){
-                        uartPutString(UART0, "Você acertou a sequência\n\r", 28);
+                    if(GPIOINT1B && currentSeq[currentIndex][i] == YELLOW){
+                        uartPutString(UART0, "Você acertou o botao amarelo\n\r", 32);
                         GPIOINT1B = false;
                     }else{
+                        uartPutString(UART0, "Você errou a sequencia\n\n\n\n\r", 29);
                         gpioSetPinValue(GPIO2, 7, HIGH);
                         gpioSetPinValue(GPIO2, 9, HIGH);
                         gpioSetPinValue(GPIO2, 11, HIGH);
@@ -162,12 +188,53 @@ int main(void){
                         gpioSetPinValue(GPIO2, 13, LOW);
                         GPIOINT2A = false;
                         sequenceSize = 0;
+                        currentIndex = -1;
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, HIGH);
+                        delay(500);
+                        gpioSetPinValue(GPIO2, 8, LOW);
+                        uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
                         break;
                     }
                 }
+
+                delay(1000);
             }
 
             sequenceSize++;
+            currentIndex++;
+            contCurrentSequence = 0;
+            if(sequenceSize >= 16){
+                uartPutString(UART0, "Você ganhou o jogo\n\r", 21);
+                sequenceSize = 1;
+                currentIndex = 0;
+                GPIOINT2A = false;
+                
+                gpioSetPinValue(GPIO2, 7, HIGH);
+                gpioSetPinValue(GPIO2, 9, HIGH);
+                gpioSetPinValue(GPIO2, 11, HIGH);
+                gpioSetPinValue(GPIO2, 13, HIGH);
+                delay(1000);
+                gpioSetPinValue(GPIO2, 7, LOW);
+                gpioSetPinValue(GPIO2, 9, LOW);
+                gpioSetPinValue(GPIO2, 11, LOW);
+                gpioSetPinValue(GPIO2, 13, LOW);
+
+                gpioSetPinValue(GPIO2, 8, HIGH);
+                delay(2000);
+                gpioSetPinValue(GPIO2, 8, LOW);
+
+                gpioSetPinValue(GPIO2, 8, HIGH);
+                delay(100);
+                gpioSetPinValue(GPIO2, 8, LOW);
+                gpioSetPinValue(GPIO2, 8, HIGH);
+                delay(100);
+                gpioSetPinValue(GPIO2, 8, LOW);
+                break;
+            }
         } 
     }
 

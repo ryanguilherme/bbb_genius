@@ -39,10 +39,14 @@ void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) |= (1 << PIN);
                 GPIOINT1A = true;
+                currentSeq[currentIndex][contCurrentSequence] = BLUE;
+                contCurrentSequence++;
             }
             else {
                 HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_1) |= (1<<PIN);
                 GPIOINT1B = true;
+                currentSeq[currentIndex][contCurrentSequence] = YELLOW;
+                contCurrentSequence++;
             }
             break;
         case GPIO2:
@@ -59,10 +63,14 @@ void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
             if (INT == A) {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_0) |= (1<<PIN);
                 GPIOINT3A = true;
+                currentSeq[currentIndex][contCurrentSequence] = RED;
+                contCurrentSequence++;
             }
             else {
                 HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_1) |= (1<<PIN);
                 GPIOINT3B = true;
+                currentSeq[currentIndex][contCurrentSequence] = GREEN;
+                contCurrentSequence++;
             }
             break;
         default:
@@ -85,19 +93,19 @@ void ISR_Handler(void){
 	switch(irq_number){
         case 32:
             gpioIsrHandler(GPIO2, A, PIN6);
-            uartPutString(UART0,"INT: GPIO2 PIN8\n\r",19);
+            uartPutString(UART0,"INT: GPIO2 PIN6\n\r",18);
             break;
         case 33:
             gpioIsrHandler(GPIO2, B, PIN8);
-            uartPutString(UART0,"INT: GPIO2 PIN8\n\r",19);
+            uartPutString(UART0,"INT: GPIO2 PIN8\n\r",18);
             break;
         case 62:
             gpioIsrHandler(GPIO3, A, PIN21);
-            uartPutString(UART0,"INT: GPIO3 PIN21\n\r",19);
+            uartPutString(UART0,"INT: GPIO3 PIN21\n\r",18);
             break;
         case 63:
             gpioIsrHandler(GPIO3, B, PIN19);
-            uartPutString(UART0,"INT: GPIO3 PIN19\n\r",19);
+            uartPutString(UART0,"INT: GPIO3 PIN19\n\r",18);
             break;
 		case 95:
 			timerIrqHandler();
@@ -109,11 +117,11 @@ void ISR_Handler(void){
             break;
 		case 98:
 			gpioIsrHandler(GPIO1, A, PIN16);
-			uartPutString(UART0,"INT: GPIO1 PIN16\n\r",19);
+			uartPutString(UART0,"INT: GPIO1 PIN16\n\r",18);
 			break;
         case 99:
             gpioIsrHandler(GPIO1, B, PIN17);
-            uartPutString(UART0,"INT: GPIO1 PIN17\n\r",20);
+            uartPutString(UART0,"INT: GPIO1 PIN17\n\r",18);
             break;
         default:
             break;
