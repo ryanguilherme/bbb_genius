@@ -27,6 +27,7 @@ void geniusButtonSetup() {
     intButtonSetup(GPIO1, A, PIN17);   //Blue led
     intButtonSetup(GPIO3, B, PIN21);  //Green led  
     intButtonSetup(GPIO3, A, PIN19); //Red led
+    intButtonSetup(GPIO2, A, PIN6); //Start button
 }
 
 /*
