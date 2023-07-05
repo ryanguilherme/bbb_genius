@@ -27,41 +27,41 @@ void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
     switch (GPIO) {
         case GPIO0:
             if (INT == A) {
-                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_0) |= (1<<PIN);
                 GPIOINT0A = true;
             }
             else {
-                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_1) = (1 << PIN);
+                HWREG(SOC_GPIO_0_REGS + GPIO_IRQSTATUS_1) |= (1 << PIN);
                 GPIOINT0B = true;
             }
             break;
         case GPIO1:
             if (INT == A) {
-                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) = (1 << PIN);
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_0) |= (1 << PIN);
                 GPIOINT1A = true;
             }
             else {
-                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                HWREG(SOC_GPIO_1_REGS + GPIO_IRQSTATUS_1) |= (1<<PIN);
                 GPIOINT1B = true;
             }
             break;
         case GPIO2:
             if (INT == A) {
-                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_0) |= (1<<PIN);
                 GPIOINT2A = true;
             }
             else {
-                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                HWREG(SOC_GPIO_2_REGS + GPIO_IRQSTATUS_1) |= (1<<PIN);
                 GPIOINT2B = true;
             }
             break;
         case GPIO3:
             if (INT == A) {
-                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_0) = (1<<PIN);
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_0) |= (1<<PIN);
                 GPIOINT3A = true;
             }
             else {
-                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_1) = (1<<PIN);
+                HWREG(SOC_GPIO_3_REGS + GPIO_IRQSTATUS_1) |= (1<<PIN);
                 GPIOINT3B = true;
             }
             break;
@@ -79,6 +79,7 @@ void gpioIsrHandler(gpioMod GPIO, intMode INT, pinNum PIN){
  */
 
 void ISR_Handler(void){
+    uartPutString(UART0, "INTERRUPT PROCESSED\n\r",21);
 	/* Verify active IRQ number */
 	unsigned int irq_number = HWREG(INTCPS + INTC_SIR_IRQ) & 0x7f;
 	switch(irq_number){
