@@ -54,3 +54,28 @@ void geniusSetup() {
     geniusButtonSetup();
     geniusLedSetup();
 }
+
+void geniusLedSequence(){
+    for(int i = 0; i < sequenceSize; i++){
+                if(sequence[i] == RED){
+                    gpioSetPinValue(GPIO2, 7, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 7, LOW);
+                }
+                else if(sequence[i] == GREEN){
+                    gpioSetPinValue(GPIO2, 9, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 9, LOW);
+                }
+                else if(sequence[i] == BLUE){
+                    gpioSetPinValue(GPIO2, 11, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 11, LOW);
+                }
+                else if(sequence[i] == YELLOW){
+                    gpioSetPinValue(GPIO2, 13, HIGH);
+                    delay(1000);
+                    gpioSetPinValue(GPIO2, 13, LOW);
+                }
+            }
+}
