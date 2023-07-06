@@ -9,6 +9,9 @@
 #include "hw_types.h"
 #include "control_module.h"
 #include "gpio.h"
+#include "timer.h"
+#include "uart.h"
+#include "buzzer.h"
 
 typedef enum color{
     RED,
@@ -27,6 +30,11 @@ void geniusButtonSetup();
 void geniusLedSetup();
 void geniusSetup();
 void geniusLedSequence();
-
+void geniusBuzzerSetup();
+void geniusInputProcessing();
+void geniusGameOver();
+void geniusVictory();
+void geniusFlagsUpdate();
+void geniusGameLoop();
 
 #endif //GENIUS_H
