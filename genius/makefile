@@ -8,8 +8,8 @@ BIN=bin/
 
 all: app
 
-app: start.o main.o gpio.o uart.o timer.o pad.o genius.o interrupt.o control_module.o clock_module.o
-	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)gpio.o $(OBJ)timer.o $(OBJ)uart.o $(OBJ)pad.o $(OBJ)genius.o $(OBJ)interrupt.o $(OBJ)control_module.o $(OBJ)clock_module.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
+app: start.o main.o gpio.o uart.o timer.o pad.o genius.o interrupt.o control_module.o clock_module.o buzzer.o
+	$(CHAIN)-ld $(OBJ)start.o $(OBJ)main.o $(OBJ)gpio.o $(OBJ)timer.o $(OBJ)buzzer.o $(OBJ)uart.o $(OBJ)pad.o $(OBJ)genius.o $(OBJ)interrupt.o $(OBJ)control_module.o $(OBJ)clock_module.o -T $(SRC)memmap.ld -o $(OBJ)main.elf
 	$(CHAIN)-objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
 	cp $(BIN)spl.boot /tftpboot/appGenius.bin
 
@@ -27,7 +27,10 @@ uart.o: $(SRC)uart.c
 
 timer.o: $(SRC)timer.c                          
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)timer.c -o $(OBJ)timer.o
-                                        
+
+buzzer.o: $(SRC)buzzer.c
+	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)buzzer.c -o $(OBJ)buzzer.o
+
 pad.o: $(SRC)pad.c                            
 	$(CHAIN)-gcc $(CFLAGS) $(IPATH) -c $(SRC)pad.c -o $(OBJ)pad.o
 
