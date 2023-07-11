@@ -24,6 +24,7 @@ extern int sequence[];
 extern int sequenceSize;
 extern int currentSeq[16][16];
 extern int contCurrentSequence;
+extern int tempDelay;
 
 void geniusGpioModSetup();
 void geniusButtonSetup();
