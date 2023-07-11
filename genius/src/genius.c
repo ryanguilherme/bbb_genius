@@ -82,17 +82,30 @@ void geniusGameOver(){
     gpioSetPinValue(GPIO2, 9, HIGH);
     gpioSetPinValue(GPIO2, 11, HIGH);
     gpioSetPinValue(GPIO2, 13, HIGH);
-    delay(1000);
+    buzzerGameOver();
     gpioSetPinValue(GPIO2, 7, LOW);
     gpioSetPinValue(GPIO2, 9, LOW);
     gpioSetPinValue(GPIO2, 11, LOW);
     gpioSetPinValue(GPIO2, 13, LOW);
 
+    delay(250);
+
+    gpioSetPinValue(GPIO2, 7, HIGH);
+    gpioSetPinValue(GPIO2, 9, HIGH);
+    gpioSetPinValue(GPIO2, 11, HIGH);
+    gpioSetPinValue(GPIO2, 13, HIGH);
+    buzzerGameOver();
+    gpioSetPinValue(GPIO2, 7, LOW);
+    gpioSetPinValue(GPIO2, 9, LOW);
+    gpioSetPinValue(GPIO2, 11, LOW);
+    gpioSetPinValue(GPIO2, 13, LOW);
+
+
     GPIOINT2A = false; //espera apertar o botão de start
     sequenceSize = 0; //reseta as variáveis para conseguir
     currentIndex = -1;//reinicar normalmente
     
-    buzzerGameOver();
+
 
     uartPutString(UART0, "Pressione o botão para iniciar o jogo\n\r", 40);
 }
@@ -142,7 +155,6 @@ void geniusInputProcessing(){
         if(sequence[i] == RED){
             if(GPIOINT3A && currentSeq[currentIndex][i] == RED){
                 uartPutString(UART0, "Você acertou o botao vermelho\n\r", 32);
-                GPIOINT3A = false;
             }else{
                 geniusGameOver();
                 break;
@@ -151,7 +163,6 @@ void geniusInputProcessing(){
         else if(sequence[i] == GREEN){
             if(GPIOINT3B && currentSeq[currentIndex][i] == GREEN){
                 uartPutString(UART0, "Você acertou o botao verde\n\r", 29);
-                GPIOINT3B = false;
             }else{
                 geniusGameOver();
                 break;
@@ -160,7 +171,6 @@ void geniusInputProcessing(){
         else if(sequence[i] == BLUE){
             if(GPIOINT1A && currentSeq[currentIndex][i] == BLUE){
                 uartPutString(UART0, "Você acertou o botao azul\n\r", 28);
-                GPIOINT1A = false;
             }else{
                 geniusGameOver();
                 break;
@@ -169,14 +179,13 @@ void geniusInputProcessing(){
         else if(sequence[i] == YELLOW){
             if(GPIOINT1B && currentSeq[currentIndex][i] == YELLOW){
                 uartPutString(UART0, "Você acertou o botao amarelo\n\r", 32);
-                GPIOINT1B = false;
             }else{
                 geniusGameOver();
                 break;
             }
         }
 
-        delay(1000);
+        //delay(1000);
     }
 }
 
@@ -216,6 +225,7 @@ void geniusVictory(){
 void geniusFlagsUpdate(){
     sequenceSize++; 
     currentIndex++;
+    tempDelay += 500;
     contCurrentSequence = 0;
 }
 
@@ -232,7 +242,7 @@ void geniusGameLoop(){
 
         geniusLedSequence();
         
-        delay(3000); // espera 3 segundos para começar a verificar 
+        delay(tempDelay); // espera n segundos para começar a verificar
 
         geniusInputProcessing();
 
