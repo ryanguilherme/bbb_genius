@@ -47,6 +47,7 @@ int sequence[] ={RED, BLUE, GREEN, YELLOW, RED, BLUE, GREEN, YELLOW, RED, BLUE, 
 int currentSeq[16][16];
 int currentIndex = 0;
 int contCurrentSequence = 0;
+int tempDelay = 2000;
 bool flag_timer;
 
 /*
