@@ -26,12 +26,12 @@ void buzzerSoundStart(){
 
 void buzzerGameOver(){
     gpioSetPinValue(GPIO2, 8, HIGH);
-    delay(500);
+    delay(250);
     gpioSetPinValue(GPIO2, 8, LOW);
-    delay(500);
-    gpioSetPinValue(GPIO2, 8, HIGH);
-    delay(500);
-    gpioSetPinValue(GPIO2, 8, LOW);
+    delay(250);
+//    gpioSetPinValue(GPIO2, 8, HIGH);
+//    delay(500);
+//    gpioSetPinValue(GPIO2, 8, LOW);
 }
 
 /*
