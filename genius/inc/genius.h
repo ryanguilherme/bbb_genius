@@ -20,11 +20,12 @@ typedef enum color{
     YELLOW
 }Color;
  
-extern int sequence[];
+extern int sequence[5][16];
 extern int sequenceSize;
 extern int currentSeq[16][16];
 extern int contCurrentSequence;
 extern int tempDelay;
+extern int linha;
 
 void geniusGpioModSetup();
 void geniusButtonSetup();
